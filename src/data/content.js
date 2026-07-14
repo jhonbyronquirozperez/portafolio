@@ -54,7 +54,7 @@ export const content = {
 
   about: {
     profileImage: '/images/about/Perfiljhonbyron2.png',
-    photoCaption: 'Medellín, Colombia',
+    photoCaption: 'Medellín, Colombia - Jhon Byron Quiroz',
     lead: 'Desarrollador full-stack con IA en el centro del proceso: más velocidad,  la misma obsesión por la calidad.',
     body: 'Chatbots que atienden clientes, automatizaciones que ahorran horas, contenido que se genera solo. Si has pensado "deberíamos estar usando IA", yo soy quien lo aterriza.',
     facts: [
@@ -89,28 +89,28 @@ export const content = {
       title: 'E-Commerce Cueros Vélez',
       category: 'Web Development',
       year: '2022',
-      image: 'public/images/projects/velez.png',
+      image: '/images/projects/velezproject.png',
       link: 'https://www.velez.com.co/',
     },
     {
       title: 'E-learning Platform',
       category: 'Web Development',
       year: '2023',
-      image: 'public/images/projects/aulas-amigas.png',
+      image: '/images/projects/aulasproject.png',
       link: 'https://aulasamigas.com/',
     },
     {
       title: 'Tomi Digital',
       category: 'Full Stack App',
       year: '2023',
-      image: 'public/images/projects/tomi.png',
+      image: '/images/projects/tommiproject.png',
       link: 'https://tomi.digital/es',
     },
     {
       title: 'Portal Alianza Francesa',
       category: 'Desarrollo Web',
       year: '2025',
-      image: 'public/images/projects/alianza.png',
+      image: '/images/projects/alianzafrancesaproject.png',
       link: 'https://medellin.alianzafrancesa.edu.co/',
     },
   ],
