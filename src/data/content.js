@@ -53,14 +53,32 @@ export const content = {
   ],
 
   about: {
-    profileImage: 'https://jhonbyronquiroz.com/wp-content/uploads/2025/07/Fotoperfil.png',
+    profileImage: '/images/about/Perfiljhonbyron2.png',
     photoCaption: 'Medellín, Colombia',
-    lead: 'Desarrollador full-stack comprometido con entregar soluciones de calidad que mejoren procesos y generen impacto empresarial.',
-    body: 'Combino diseño visual impactante con código limpio y funcional para construir productos digitales que destacan.',
+    lead: 'Desarrollador full-stack con IA en el centro del proceso: más velocidad,  la misma obsesión por la calidad.',
+    body: 'Chatbots que atienden clientes, automatizaciones que ahorran horas, contenido que se genera solo. Si has pensado "deberíamos estar usando IA", yo soy quien lo aterriza.',
     facts: [
       { label: 'Enfoque', value: 'IA-first' },
-      { label: 'Stack', value: 'React · PHP · WordPress · Node · Python · Java · Next.js · Tailwind · Figma · Docker' },
       { label: 'Base', value: 'Medellín, CO' },
+    ],
+    // Tecnologías agrupadas: cada grupo pinta unos logos representativos
+    // (slugs de simple-icons) + las pills de texto con todo el detalle.
+    techStack: [
+      {
+        label: 'Frontend',
+        icons: ['react', 'nextdotjs', 'threedotjs', 'greensock', 'tailwindcss'],
+        items: ['React', 'Next.js', 'Three.js', 'GSAP', 'Tailwind'],
+      },
+      {
+        label: 'Backend',
+        icons: ['php', 'laravel', 'python', 'mysql'],
+        items: ['PHP', 'Laravel', 'Python', 'Java', 'MySQL'],
+      },
+      {
+        label: 'Plataformas & herramientas',
+        icons: ['wordpress', 'webflow', 'figma', 'docker'],
+        items: ['WordPress', 'Webflow', 'Vtex', 'Figma', 'Docker'],
+      },
     ],
   },
 
@@ -71,28 +89,28 @@ export const content = {
       title: 'E-Commerce Cueros Vélez',
       category: 'Web Development',
       year: '2022',
-      image: 'https://jhonbyronquiroz.com/wp-content/uploads/2025/07/velez.png',
+      image: 'public/images/projects/velez.png',
       link: 'https://www.velez.com.co/',
     },
     {
       title: 'E-learning Platform',
       category: 'Web Development',
       year: '2023',
-      image: 'https://jhonbyronquiroz.com/wp-content/uploads/2025/07/Aulas-amigas.png',
+      image: 'public/images/projects/aulas-amigas.png',
       link: 'https://aulasamigas.com/',
     },
     {
       title: 'Tomi Digital',
       category: 'Full Stack App',
       year: '2023',
-      image: 'https://jhonbyronquiroz.com/wp-content/uploads/2025/07/tomi.png',
+      image: 'public/images/projects/tomi.png',
       link: 'https://tomi.digital/es',
     },
     {
       title: 'Portal Alianza Francesa',
       category: 'Desarrollo Web',
       year: '2025',
-      image: 'https://jhonbyronquiroz.com/wp-content/uploads/2025/07/alianza.png',
+      image: 'public/images/projects/alianza.png',
       link: 'https://medellin.alianzafrancesa.edu.co/',
     },
   ],

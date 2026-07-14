@@ -1,4 +1,5 @@
 import { SplitText } from './SplitText';
+import { TechStack } from './TechStack';
 
 /**
  * Sección "Sobre mí": foto con revelado de cortina + texto + datos.
@@ -42,6 +43,8 @@ export function About({ about }) {
               </li>
             ))}
           </ul>
+
+          <TechStack groups={about.techStack} />
         </div>
       </div>
     </section>
