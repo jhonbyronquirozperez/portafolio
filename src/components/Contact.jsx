@@ -8,7 +8,7 @@ export function Contact({ contact }) {
   const whatsapp = String(contact.whatsapp).replace(/\D/g, '');
 
   return (
-    <section className="contact section" id="contact">
+    <section className="contact section" id="contact" data-snap-section>
       <div className="section-head">
         <span className="section-label mono" data-reveal>
           03 / Contacto

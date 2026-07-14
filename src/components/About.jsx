@@ -6,7 +6,7 @@ import { SplitText } from './SplitText';
  */
 export function About({ about }) {
   return (
-    <section className="about section" id="about">
+    <section className="about section" id="about" data-snap-section>
       <div className="section-head">
         <span className="section-label mono" data-reveal>
           01 / Sobre mí

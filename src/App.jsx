@@ -1,7 +1,8 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useMemo } from 'react';
 import content from './data/content';
 import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
 import { useMercuryAnimations } from './hooks/useMercuryAnimations';
+import { useLenis } from './hooks/useLenis';
 import { Preloader } from './components/Preloader';
 import { Cursor } from './components/Cursor';
 import { Header } from './components/Header';
@@ -11,6 +12,7 @@ import { About } from './components/About';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { SectionNav } from './components/SectionNav';
 
 /**
  * Composición del portafolio. Equivale a front-page.php: solo ensambla
@@ -26,12 +28,24 @@ export default function App() {
   // GSAP: preloader, reveals al scroll y micro-interacciones.
   useMercuryAnimations(rootRef, reducedMotion, handlePreloaderDone);
 
+  // Lenis: scroll suave + asentado por sección (ver hook para detalles).
+  const lenisRef = useLenis(rootRef, reducedMotion);
+
+  const sections = useMemo(
+    () => [
+      { id: 'hero', label: 'Inicio' },
+      ...content.nav.map((item) => ({ id: item.href.slice(1), label: item.label })),
+    ],
+    []
+  );
+
   return (
     <div ref={rootRef}>
       {showPreloader && <Preloader />}
       <Cursor reducedMotion={reducedMotion} />
 
       <Header brand={content.brand} nav={content.nav} />
+      <SectionNav sections={sections} lenisRef={lenisRef} reducedMotion={reducedMotion} />
 
       <main className="site-main" id="main">
         <Hero hero={content.hero} reducedMotion={reducedMotion} />

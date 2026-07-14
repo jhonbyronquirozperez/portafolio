@@ -43,7 +43,9 @@
 
 /* ---------- Reset mínimo ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* El scroll suave lo maneja Lenis (useLenis.js); scroll-behavior nativo
+   competiría con su interpolación. Con movimiento reducido, Lenis se
+   desactiva y el salto instantáneo por defecto es lo correcto. */
 body {
   margin: 0;
   background: var(--ink);
@@ -390,62 +392,91 @@ body::after {
 }
 .about-facts li span { color: var(--muted); }
 
-/* ---------- Proyectos ---------- */
-.projects-list { border-top: 1px solid var(--line); }
-.project-row {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  padding: clamp(1.4rem, 3.5vh, 2.4rem) 0;
-  border-bottom: 1px solid var(--line);
-  transition: padding-left 0.4s var(--ease-out);
+/* ---------- Proyectos: cards horizontales (scroll-jacked en desktop) --- */
+.projects-rail {
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  overflow: hidden;
 }
-.project-row:hover { padding-left: 1.2rem; }
-.project-index { color: var(--muted); }
-.project-row .project-title {
-  font-size: clamp(1.3rem, 3.6vw, 2.6rem);
+.projects-track {
+  display: flex;
+  gap: clamp(1.5rem, 3.4vw, 3.2rem);
+  width: max-content;
+  padding-bottom: 0.4rem;
+}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  width: min(80vw, 620px);
+  flex-shrink: 0;
+  color: inherit;
+}
+.project-card-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--ink-soft);
+}
+.project-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-out);
+}
+.project-card:hover .project-card-media img { transform: scale(1.06); }
+.project-card-arrow {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(8, 9, 10, 0.55);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+  transition: background 0.3s, color 0.3s, transform 0.35s var(--ease-out);
+}
+.project-card:hover .project-card-arrow {
+  background: var(--solar);
+  color: var(--ink);
+  transform: translate(3px, -3px);
+}
+.project-card-index {
+  margin-top: 1.2rem;
+  color: var(--cherenkov);
+  font-size: 0.68rem;
+}
+.project-card-title {
+  margin: 0.3rem 0 0.15rem;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
   font-weight: 600;
   text-transform: uppercase;
   transition: color 0.3s;
 }
-.project-row:hover .project-title { color: var(--solar); }
-.project-meta {
+.project-card:hover .project-card-title { color: var(--solar); }
+.project-card-meta {
   color: var(--muted);
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  gap: 0.2rem;
+  font-size: 0.72rem;
 }
-.project-meta em { font-style: normal; color: var(--cherenkov); }
-.project-arrow {
-  color: var(--muted);
-  transition: transform 0.35s var(--ease-out), color 0.35s;
-}
-.project-row:hover .project-arrow {
-  color: var(--solar);
-  transform: translate(4px, -4px);
+.project-card-meta em {
+  font-style: normal;
+  color: var(--silver);
+  margin-left: 0.5em;
 }
 
-/* Vista previa flotante que sigue al cursor */
-.project-preview {
-  position: fixed;
-  top: 0; left: 0;
-  width: min(360px, 32vw);
-  aspect-ratio: 3 / 2;
-  pointer-events: none;
-  z-index: 900;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.85);
-  overflow: hidden;
-  border: 1px solid var(--line);
+@media (max-width: 860px) {
+  .projects-rail {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+  }
+  .project-card { width: 84vw; scroll-snap-align: start; }
 }
-.project-preview img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-@media (pointer: coarse) { .project-preview { display: none; } }
 
 /* ---------- Contacto ---------- */
 .contact { text-align: left; }
@@ -516,6 +547,65 @@ body::after {
 .footer-links a:hover { color: var(--solar); }
 .footer-meta { color: var(--muted); }
 
+/* ---------- Navegación por sección (dots, estilo "capítulos") ---------- */
+.section-nav {
+  position: fixed;
+  top: 50%;
+  right: clamp(1.1rem, 2.5vw, 2.2rem);
+  transform: translateY(-50%);
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+.section-nav-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--muted);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease-out);
+}
+.section-nav-dot:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 1px;
+  height: 0.9rem;
+  background: var(--line);
+  transform: translateX(-50%);
+}
+.section-nav-dot:hover { border-color: var(--cherenkov); }
+.section-nav-dot.is-active {
+  background: var(--cherenkov);
+  border-color: var(--cherenkov);
+  transform: scale(1.3);
+}
+.section-nav-label {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.62rem;
+  color: var(--silver);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.section-nav-dot:hover .section-nav-label,
+.section-nav-dot.is-active .section-nav-label {
+  opacity: 1;
+}
+@media (max-width: 860px) {
+  .section-nav { display: none; }
+}
+
 /* ---------- Single proyecto / genéricos ---------- */
 .project-single, .archive-section, .error-404 { padding-top: calc(var(--section-gap) + 4rem); }
 .project-single-image { margin: 0 0 2.5rem; border: 1px solid var(--line); }
@@ -549,15 +639,12 @@ body::after {
 
   .about-grid { grid-template-columns: 1fr; }
   .about-photo { max-width: 360px; }
-  .project-row { grid-template-columns: auto 1fr auto; }
-  .project-meta { display: none; }
   .hero-coords, .hero-element { display: none; }
   .scroll-hint { margin: 0 auto; }
 }
 
 /* ---------- Accesibilidad: movimiento reducido ---------- */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

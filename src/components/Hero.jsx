@@ -7,7 +7,7 @@ import { SplitText } from './SplitText';
  */
 export function Hero({ hero, reducedMotion }) {
   return (
-    <section className="hero" id="hero">
+    <section className="hero" id="hero" data-snap-section>
       <MercuryBlob reducedMotion={reducedMotion} />
 
       <div className="hero-content">

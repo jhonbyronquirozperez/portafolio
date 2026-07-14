@@ -39,11 +39,17 @@ export const content = {
     'WordPress',
     'Three.js',
     'GSAP',
-    'Node.js',
+    'webflow',
+    'Python',
     'IA-first',
     'Vtex',
     'Laravel',
     'MySQL',
+    'java',
+    'Next.js',
+    'Tailwind',
+    'Figma',
+    'Docker',
   ],
 
   about: {
@@ -53,7 +59,7 @@ export const content = {
     body: 'Combino diseño visual impactante con código limpio y funcional para construir productos digitales que destacan.',
     facts: [
       { label: 'Enfoque', value: 'IA-first' },
-      { label: 'Stack', value: 'React · PHP · WordPress · Node' },
+      { label: 'Stack', value: 'React · PHP · WordPress · Node · Python · Java · Next.js · Tailwind · Figma · Docker' },
       { label: 'Base', value: 'Medellín, CO' },
     ],
   },

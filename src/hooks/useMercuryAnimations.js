@@ -8,8 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
  * Orquestación de animaciones (port de assets/js/animations.js).
  *
  * Secuencia: preloader con contador → revelado del hero por caracteres →
- * reveals al scroll (ScrollTrigger) → micro-interacciones (botones
- * magnéticos + preview de proyecto que sigue al cursor).
+ * reveals al scroll (ScrollTrigger) → scroll horizontal pineado de
+ * Proyectos → micro-interacciones (botones magnéticos).
  *
  * Todo vive dentro de un gsap.context() acotado al root, así el cleanup
  * de React revierte tweens y ScrollTriggers automáticamente. Los event
@@ -104,49 +104,36 @@ export function useMercuryAnimations(rootRef, reducedMotion, setPreloaderDone) {
         });
       });
 
-      // Filas de proyectos en cascada.
-      gsap.utils.toArray('[data-project]').forEach((row, i) => {
-        gsap.from(row, {
-          opacity: 0,
-          y: 40,
-          duration: 0.8,
-          delay: (i % 4) * 0.06,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: row, start: 'top 92%' },
+      // Proyectos: en desktop, pinea el riel y traduce las cards en X a
+      // medida que el usuario hace scroll vertical (scroll-jacking, como
+      // en lenis.dev). En móvil, .projects-rail cae a un carrusel nativo
+      // (ver main.css), así que este bloque no aplica ahí.
+      const projectsRail = root.querySelector('[data-projects-rail]');
+      const projectsTrack = root.querySelector('[data-projects-track]');
+      if (projectsRail && projectsTrack) {
+        ScrollTrigger.matchMedia({
+          '(min-width: 861px)': () => {
+            const getDistance = () => projectsTrack.scrollWidth - projectsRail.clientWidth;
+            gsap.to(projectsTrack, {
+              x: () => -getDistance(),
+              ease: 'none',
+              scrollTrigger: {
+                trigger: projectsRail,
+                start: 'top top',
+                end: () => `+=${getDistance()}`,
+                scrub: 0.6,
+                pin: true,
+                invalidateOnRefresh: true,
+              },
+            });
+          },
         });
-      });
+      }
 
       // ----------------------------------------------------------------
       // 3 + 4. Micro-interacciones (solo punteros precisos).
       // ----------------------------------------------------------------
       if (window.matchMedia('(pointer: fine)').matches) {
-        // Vista previa de proyecto que sigue al cursor.
-        document.querySelectorAll('[data-project]').forEach((row) => {
-          const preview = row.querySelector('.project-preview');
-          if (!preview) return;
-
-          const xTo = gsap.quickTo(preview, 'x', { duration: 0.4, ease: 'power3' });
-          const yTo = gsap.quickTo(preview, 'y', { duration: 0.4, ease: 'power3' });
-
-          const onEnter = () =>
-            gsap.to(preview, { opacity: 1, scale: 1, duration: 0.35, ease: 'power3.out' });
-          const onLeave = () =>
-            gsap.to(preview, { opacity: 0, scale: 0.85, duration: 0.3, ease: 'power3.in' });
-          const onMove = (e) => {
-            xTo(e.clientX);
-            yTo(e.clientY);
-          };
-
-          row.addEventListener('pointerenter', onEnter);
-          row.addEventListener('pointerleave', onLeave);
-          row.addEventListener('pointermove', onMove);
-          cleanups.push(() => {
-            row.removeEventListener('pointerenter', onEnter);
-            row.removeEventListener('pointerleave', onLeave);
-            row.removeEventListener('pointermove', onMove);
-          });
-        });
-
         // Botones y enlaces magnéticos.
         document.querySelectorAll('[data-magnetic]').forEach((el) => {
           const xTo = gsap.quickTo(el, 'x', { duration: 0.5, ease: 'elastic.out(1, 0.4)' });
