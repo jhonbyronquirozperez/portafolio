@@ -1,4 +1,38 @@
-import * as simpleIcons from 'simple-icons';
+import {
+  siReact,
+  siNextdotjs,
+  siThreedotjs,
+  siGreensock,
+  siTailwindcss,
+  siPhp,
+  siLaravel,
+  siPython,
+  siMysql,
+  siWordpress,
+  siWebflow,
+  siFigma,
+  siDocker,
+  siVtex,
+} from 'simple-icons';
+
+// Imports nombrados (no `import *`): así Vite solo empaqueta los ~13
+// íconos que usamos en vez de la librería completa (miles de logos).
+const ICONS = {
+  react: siReact,
+  nextdotjs: siNextdotjs,
+  threedotjs: siThreedotjs,
+  greensock: siGreensock,
+  tailwindcss: siTailwindcss,
+  php: siPhp,
+  laravel: siLaravel,
+  python: siPython,
+  mysql: siMysql,
+  wordpress: siWordpress,
+  webflow: siWebflow,
+  figma: siFigma,
+  docker: siDocker,
+  vtex: siVtex,
+};
 
 // Luminancia percibida: si el color de marca es casi negro, se vuelve
 // invisible sobre el fondo oscuro del sitio, así que cae a blanco.
@@ -9,14 +43,9 @@ function isTooDark(hex) {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b < 40;
 }
 
-/**
- * Ícono de marca (simple-icons) coloreado con su hex oficial.
- * `slug` es el nombre en minúsculas (p.ej. "react", "nextdotjs");
- * se resuelve al export `si<Slug>` del paquete.
- */
+/** Ícono de marca (simple-icons) coloreado con su hex oficial. */
 function BrandIcon({ slug }) {
-  const key = `si${slug.charAt(0).toUpperCase()}${slug.slice(1)}`;
-  const icon = simpleIcons[key];
+  const icon = ICONS[slug];
   if (!icon) return null;
 
   const color = isTooDark(icon.hex) ? 'var(--white)' : `#${icon.hex}`;
