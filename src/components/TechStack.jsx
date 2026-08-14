@@ -1,37 +1,37 @@
 import {
-  siReact,
-  siNextdotjs,
-  siThreedotjs,
-  siGreensock,
-  siTailwindcss,
-  siPhp,
-  siLaravel,
   siPython,
-  siMysql,
-  siWordpress,
-  siWebflow,
-  siFigma,
+  siFastapi,
+  siGit,
+  siReact,
   siDocker,
-  siVtex,
+  siPostgresql,
+  siMysql,
+  siDbeaver,
+  siGooglecloud,
+  siLangchain,
+  siAnthropic,
+  siHuggingface,
+  siN8n,
 } from 'simple-icons';
 
 // Imports nombrados (no `import *`): así Vite solo empaqueta los ~13
 // íconos que usamos en vez de la librería completa (miles de logos).
+// Las claves están en minúscula y deben coincidir con los slugs que se
+// escriben en content.js (about.techStack[].icons).
 const ICONS = {
-  react: siReact,
-  nextdotjs: siNextdotjs,
-  threedotjs: siThreedotjs,
-  greensock: siGreensock,
-  tailwindcss: siTailwindcss,
-  php: siPhp,
-  laravel: siLaravel,
   python: siPython,
-  mysql: siMysql,
-  wordpress: siWordpress,
-  webflow: siWebflow,
-  figma: siFigma,
+  fastapi: siFastapi,
+  git: siGit,
+  react: siReact,
   docker: siDocker,
-  vtex: siVtex,
+  postgresql: siPostgresql,
+  mysql: siMysql,
+  dbeaver: siDbeaver,
+  googlecloud: siGooglecloud,
+  langchain: siLangchain,
+  anthropic: siAnthropic,
+  huggingface: siHuggingface,
+  n8n: siN8n,
 };
 
 // Luminancia percibida: si el color de marca es casi negro, se vuelve

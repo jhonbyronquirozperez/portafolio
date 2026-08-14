@@ -68,19 +68,19 @@ export const content = {
     // (slugs de simple-icons) + las pills de texto con todo el detalle.
     techStack: [
       {
-        label: 'Frontend',
-        icons: ['react', 'nextdotjs', 'threedotjs', 'greensock', 'tailwindcss'],
-        items: ['React', 'Next.js', 'Three.js', 'GSAP', 'Tailwind'],
+        label: 'Software Engineering',
+        icons: ['python', 'fastapi', 'react', 'git', 'docker'],
+        items: ['Python', 'APIs / FastAPI', 'Backend', 'Frontend', 'Git', 'Docker','Arquitectura','Integraciones'  ],
       },
       {
-        label: 'Backend',
-        icons: ['php', 'laravel', 'python', 'mysql'],
-        items: ['PHP', 'Laravel', 'Python', 'Java', 'MySQL'],
+        label: 'Data Engineering',
+        icons: ['postgresql', 'mysql', 'dbeaver', 'googlecloud'],
+        items: ['PostgreSQL', 'ETL/ELT', 'Data pipelines', 'APIs', 'fuentes de datos',  'cloud', 'AWS', 'GCP'],
       },
       {
-        label: 'Plataformas & herramientas',
-        icons: ['wordpress', 'webflow', 'figma', 'docker'],
-        items: ['WordPress', 'Webflow', 'Vtex', 'Figma', 'Docker'],
+        label: 'AI Engineering',
+        icons: ['langchain', 'anthropic', 'huggingface', 'n8n'],
+        items: ['LLMs', 'Chatbots', 'Automatizaciones', 'RAG','Agentes', 'MCPs', 'LangChain', 'HuggingFace', 'Anthropic', 'n8n'],
       },
     ],
   },
