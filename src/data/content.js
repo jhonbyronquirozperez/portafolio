@@ -89,30 +89,30 @@ export const content = {
   // Si un proyecto no tiene link, se renderiza como bloque no clicable.
   projects: [
     {
-      title: 'E-Commerce Cueros Vélez',
-      category: 'Web Development',
-      year: '2022',
+      title: 'Ingenieria de datos y ETL',
+      category: 'Ingenieria de datos',
+      year: '2023',
       image: '/images/projects/velezproject.webp',
       link: 'https://www.velez.com.co/',
     },
     {
       title: 'E-learning Platform',
       category: 'Web Development',
-      year: '2023',
+      year: '2022',
       image: '/images/projects/aulasproject.webp',
       link: 'https://aulasamigas.com/',
     },
     {
       title: 'Tomi Digital',
       category: 'Full Stack App',
-      year: '2023',
+      year: '2020',
       image: '/images/projects/tommiproject.webp',
       link: 'https://tomi.digital/es',
     },
     {
       title: 'Portal Alianza Francesa',
       category: 'Desarrollo Web',
-      year: '2025',
+      year: '2021',
       image: '/images/projects/alianzafrancesaproject.webp',
       link: 'https://medellin.alianzafrancesa.edu.co/',
     },
