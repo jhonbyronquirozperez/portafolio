@@ -1,5 +1,9 @@
-import { MercuryBlob } from './MercuryBlob';
+import { lazy, Suspense } from 'react';
 import { SplitText } from './SplitText';
+
+// Three.js (~450KB) queda fuera del bundle principal: se pide en paralelo
+// y se monta en cuanto llega, sin bloquear el primer render del texto.
+const MercuryBlob = lazy(() => import('./MercuryBlob'));
 
 /**
  * Sección hero: blob de mercurio (Three.js) + título dividido por
@@ -8,7 +12,9 @@ import { SplitText } from './SplitText';
 export function Hero({ hero, reducedMotion }) {
   return (
     <section className="hero" id="hero" data-snap-section>
-      <MercuryBlob reducedMotion={reducedMotion} />
+      <Suspense fallback={null}>
+        <MercuryBlob reducedMotion={reducedMotion} />
+      </Suspense>
 
       <div className="hero-content">
         <p className="hero-eyebrow mono" data-reveal>

@@ -7,6 +7,7 @@ import { Preloader } from './components/Preloader';
 import { Cursor } from './components/Cursor';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { Now } from './components/Now';
 import { SkillsMarquee } from './components/SkillsMarquee';
 import { About } from './components/About';
 import { Projects } from './components/Projects';
@@ -34,6 +35,7 @@ export default function App() {
   const sections = useMemo(
     () => [
       { id: 'hero', label: 'Inicio' },
+      { id: 'now', label: 'Ahora' },
       ...content.nav.map((item) => ({ id: item.href.slice(1), label: item.label })),
     ],
     []
@@ -49,6 +51,7 @@ export default function App() {
 
       <main className="site-main" id="main">
         <Hero hero={content.hero} reducedMotion={reducedMotion} />
+        <Now now={content.now} reducedMotion={reducedMotion} />
         <SkillsMarquee skills={content.skills} />
         <About about={content.about} />
         <Projects projects={content.projects} />

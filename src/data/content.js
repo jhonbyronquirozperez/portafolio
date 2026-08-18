@@ -55,6 +55,43 @@ export const content = {
   
   ],
 
+  // Sección "Ahora": últimos proyectos / en qué estás trabajando en este
+  // momento. Vive entre el hero y "Sobre mí". Cada item admite:
+  //   type: 'video' | 'image' | 'document' | 'link'
+  //   media: ruta a un archivo en /public (mp4, webp/png/jpg, pdf) — opcional
+  //   href:  si lo pones, la card entera es un enlace (se abre en pestaña nueva)
+  // Si `media` falta o el archivo no existe todavía, la card cae a un
+  // ícono según el tipo (no se rompe el layout).
+  now: {
+    eyebrow: 'En este momento',
+    title: 'En qué estoy trabajando',
+    subtitle:
+      'Un vistazo rápido a lo que tengo entre manos ahora mismo: proyectos en curso, notas técnicas y material que todavía se está cocinando.',
+    items: [
+      {
+        type: 'video',
+        title: 'Demo del planeta interactivo',
+        description: 'Shaders y física del hero de este portafolio.',
+        date: '2026',
+        media: '/videos/now/demo.mp4',
+      },
+      {
+        type: 'document',
+        title: 'Propuesta técnica — Automatización IA',
+        description: 'Arquitectura de un pipeline de agentes para soporte.',
+        date: '2026',
+        media: '/documents/now/propuesta.pdf',
+      },
+      {
+        type: 'image',
+        title: 'Explorando UI para un dashboard',
+        description: 'Bocetos de un panel de analítica en tiempo real.',
+        date: '2026',
+        media: '/images/now/dashboard-sketch.webp',
+      },
+    ],
+  },
+
   about: {
     profileImage: '/images/about/Perfiljhonbyron2.webp',
     photoCaption: 'Medellín, Colombia - Jhon Byron Quiroz',
