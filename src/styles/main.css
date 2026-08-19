@@ -328,11 +328,6 @@ body::after {
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: var(--white);
-  text-decoration: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: var(--ink);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.14em;
 }
 .now-subtitle {
   max-width: 46ch;
@@ -342,17 +337,22 @@ body::after {
 }
 
 .now-items {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1.2rem;
   margin-top: clamp(2.5rem, 6vh, 4rem);
+  padding-bottom: 0.4rem;
+  overflow-x: auto;
   pointer-events: none;
 }
 .now-card {
   pointer-events: auto;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  width: min(272px, 100%);
+  width: 272px;
   background: var(--ink);
   border-radius: 14px;
   padding: 1rem;
@@ -402,7 +402,7 @@ body::after {
 
 @media (max-width: 860px) {
   .now-content { max-width: 100%; }
-  .now-card { width: 100%; max-width: 320px; }
+  .now-card { width: min(78vw, 270px); }
 }
 
 /* ---------- Marquee de skills ---------- */

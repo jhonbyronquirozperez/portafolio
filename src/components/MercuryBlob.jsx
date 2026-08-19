@@ -68,7 +68,7 @@ const NOISE_GLSL = `
   float fbm(vec3 p) {
     float value = 0.0;
     float amp = 0.5;
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 5; i++) {
       value += amp * snoise(p);
       p *= 2.0;
       amp *= 0.5;
@@ -316,7 +316,7 @@ export function MercuryBlob({ reducedMotion }) {
       vertexShader: PLANET_VERTEX,
       fragmentShader: PLANET_FRAGMENT,
     });
-    const planetGeo = new THREE.SphereGeometry(1.55, 192, 192);
+    const planetGeo = new THREE.SphereGeometry(1.55, 128, 128);
     const planet = new THREE.Mesh(planetGeo, planetMaterial);
 
     // Halo atmosférico: shell ligeramente más grande, back-face + fresnel.
@@ -633,6 +633,7 @@ export function MercuryBlob({ reducedMotion }) {
     let rafId = null;
 
     let planetSpin = 0;
+    let raycastFrame = 0;
 
     function renderFrame() {
       const delta = clock.getDelta();
@@ -642,14 +643,20 @@ export function MercuryBlob({ reducedMotion }) {
       mouse.y += (mouse.ty - mouse.y) * 0.04;
 
       // Raycast contra el planeta para detectar el hover del cursor.
-      planetGroup.updateMatrixWorld(true);
-      raycaster.setFromCamera(pointerNDC, camera);
-      const hits = raycaster.intersectObject(planet, false);
-      isHovering = hits.length > 0;
-      if (isHovering) {
-        localHoverPoint.copy(hits[0].point);
-        planet.worldToLocal(localHoverPoint);
-        sharedUniforms.uHoverPoint.value.copy(localHoverPoint);
+      // A media frecuencia (30fps efectivos): imperceptible en un glow
+      // que ya se suaviza con lerp, y ahorra un test contra ~33k tris
+      // en la mitad de los frames.
+      raycastFrame += 1;
+      if (raycastFrame % 2 === 0) {
+        planetGroup.updateMatrixWorld(true);
+        raycaster.setFromCamera(pointerNDC, camera);
+        const hits = raycaster.intersectObject(planet, false);
+        isHovering = hits.length > 0;
+        if (isHovering) {
+          localHoverPoint.copy(hits[0].point);
+          planet.worldToLocal(localHoverPoint);
+          sharedUniforms.uHoverPoint.value.copy(localHoverPoint);
+        }
       }
       hoverStrength += ((isHovering ? 1 : 0) - hoverStrength) * 0.08;
       sharedUniforms.uHoverStrength.value = hoverStrength;

@@ -77,23 +77,23 @@ export function Now({ now, reducedMotion }) {
         <p className="now-subtitle" data-reveal>
           {now.subtitle}
         </p>
+      </div>
 
-        <div className="now-items">
-          {now.items.map((item) => {
-            const Tag = item.href ? 'a' : 'div';
-            const linkProps = item.href
-              ? { href: item.href, target: '_blank', rel: 'noopener noreferrer' }
-              : {};
-            return (
-              <Tag key={item.title} className="now-card" data-reveal {...linkProps}>
-                <NowCardMedia item={item} />
-                <span className="now-card-date mono">{item.date}</span>
-                <h3 className="now-card-title">{item.title}</h3>
-                <p className="now-card-desc">{item.description}</p>
-              </Tag>
-            );
-          })}
-        </div>
+      <div className="now-items">
+        {now.items.map((item) => {
+          const Tag = item.href ? 'a' : 'div';
+          const linkProps = item.href
+            ? { href: item.href, target: '_blank', rel: 'noopener noreferrer' }
+            : {};
+          return (
+            <Tag key={item.title} className="now-card" data-reveal {...linkProps}>
+              <NowCardMedia item={item} />
+              <span className="now-card-date mono">{item.date}</span>
+              <h3 className="now-card-title">{item.title}</h3>
+              <p className="now-card-desc">{item.description}</p>
+            </Tag>
+          );
+        })}
       </div>
     </section>
   );
