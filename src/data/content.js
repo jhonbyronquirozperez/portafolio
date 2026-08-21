@@ -69,11 +69,11 @@ export const content = {
       'Un vistazo rápido a lo que tengo entre manos ahora mismo: proyectos en curso, notas técnicas y material que todavía se está cocinando.',
     items: [
       {
-        type: 'video',
-        title: 'Demo del planeta interactivo',
-        description: 'Shaders y física del hero de este portafolio.',
+        type: 'image',
+        title: 'Agente de IA operaciones',
+        description: 'Pipeline de agentes para automatizar tareas de soporte y operaciones.',
         date: '2026',
-        media: '/videos/now/demo.mp4',
+        media: '/images/now/agente-ia.jpg',
       },
       {
         type: 'document',
